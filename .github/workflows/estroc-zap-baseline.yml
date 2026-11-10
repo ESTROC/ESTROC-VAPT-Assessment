@@ -1,0 +1,23 @@
+
+name: ESTROC - Production Passive ZAP Baseline
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  zap-baseline:
+    name: Passive Website Security Assessment
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Run OWASP ZAP Baseline
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          target: https://estroc.co.in
+          cmd_options: "-m 1"
+          allow_issue_writing: false
+          artifact_name: estroc-zap-baseline-apex
